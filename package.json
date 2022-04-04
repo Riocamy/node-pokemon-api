@@ -1,0 +1,17 @@
+{
+  "name": "pokemon-api",
+  "version": "1.0.0",
+  "description": "An awesome API rest to handle some pokemons.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Chlodion Gossart",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
