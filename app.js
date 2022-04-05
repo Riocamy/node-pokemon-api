@@ -1,9 +1,25 @@
 const express = require('express');
+const morgan = require('morgan');
+const favicon = require('serve-favicon')
 const helper = require('./helper.js');
 let pokemons = require('./mock-pokemon');
 
 const app = express();
 const port = 3000;
+
+/*
+//Ajout du Middleware (création manuelle)
+const logger = (req, res, next) => {
+  console.log(`URL : ${req.url}`);
+  next();
+}
+app.use(logger);
+*/
+
+//Ajout des Middlewares
+app
+  .use(favicon(__dirname + `/favicon.ico`)) //call favicon
+  .use(morgan('dev')); //call Morgan
 
 app.get('/', (req, res) => res.send('Hello, Express 2 !'));
 
