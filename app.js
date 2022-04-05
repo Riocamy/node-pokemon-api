@@ -55,4 +55,16 @@ app.post('/api/pokemons', (req, res) => {
   res.json(helper.success(message, pokemonCreated))
 })
 
+//Mettre à jour un pokémon dans l'API
+app.put('/api/pokemons/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const pokemonUpdated = { ...req.body, id: id }
+  pokemons = pokemons.map(pokemon => {
+  return pokemon.id === id ? pokemonUpdated : pokemon
+  })
+  
+  const message = `Le pokémon ${pokemonUpdated.name} a bien été modifié.`
+  res.json(helper.success(message, pokemonUpdated))
+});
+
 app.listen(port, () => console.log(`Notre application Node est démarrée sur : http://localhost:${port}`));
