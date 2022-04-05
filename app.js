@@ -17,7 +17,7 @@ const logger = (req, res, next) => {
 app.use(logger);
 */
 
-//imports des Middlewares sur l'API
+//Import des Middlewares sur l'API
 app
   .use(favicon(__dirname + `/favicon.ico`)) //call favicon
   .use(morgan('dev')) //call Morgan
@@ -39,6 +39,8 @@ app.get('/api/pokemons', (req, res) => {
   res.send(`Il y a ${pokemons.length} pokémons dans le pokédex, pour l'instant !`);
 });
 */
+
+/**** Mise en place du CRUD *****/
 
 // On retourne la liste des pokémons au format JSON, avec un message :
 app.get('/api/pokemons', (req, res) => {
@@ -67,4 +69,14 @@ app.put('/api/pokemons/:id', (req, res) => {
   res.json(helper.success(message, pokemonUpdated))
 });
 
+//Supprimer un pokémon de l'API
+app.delete('/api/pokemons/:id', (req, res) => {
+  const id = parseInt(req.params.id)
+  const pokemonDeleted = pokemons.find(pokemon => pokemon.id === id)
+  pokemons = pokemons.filter(pokemon => pokemon.id !== id)
+  const message = `Le pokémon ${pokemonDeleted.name} a bien été supprimé.`
+  res.json(helper.success(message, pokemonDeleted))
+});
+
+//Démarrage de l'API
 app.listen(port, () => console.log(`Notre application Node est démarrée sur : http://localhost:${port}`));
