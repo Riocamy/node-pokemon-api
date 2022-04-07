@@ -3,7 +3,15 @@ const morgan = require('morgan');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser'); //Parse automatiquement les requêtes en JSON
 const helper = require('./helper.js');
+const mongoose = require('mongoose');
 let pokemons = require('./mock-pokemon');
+
+//Connexion au serveur MongoDB
+mongoose.connect('mongodb+srv://Riocamy:BBD9!ARYheszL9AF@pokemonapi.9wujg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  { useNewUrlParser: true,
+    useUnifiedTopology: true })
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
 const port = 3000;
@@ -40,7 +48,7 @@ app.get('/api/pokemons', (req, res) => {
 });
 */
 
-/**** Mise en place du CRUD *****/
+/**** Mise en place du CRUD ****/
 
 // On retourne la liste des pokémons au format JSON, avec un message :
 app.get('/api/pokemons', (req, res) => {
